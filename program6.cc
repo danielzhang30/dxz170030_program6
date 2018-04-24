@@ -9,10 +9,11 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <cctype>
 
 #define MATRIX_WIDTH 3
 #define MATRIX_HEIGHT 5
-#define BOX_WIDTH 15
+#define BOX_WIDTH 18
 #define MATRIX_NAME_STRING "Binary File Contents"
 
 using namespace std;
@@ -64,12 +65,17 @@ int main()
 	/*
 	* Dipslay the messages
 	*/
-	std::string magNum = "Magic: ";
+	std::string magNum = "Magic: 0x";
 	std::stringstream str;
 	// Converts the magic number to hex
 	str << std::hex << myHeader->magicNumber;
+	std::string hexString = str.str();
+	for (unsigned int i=0; i<hexString.length(); i++)
+	{
+		hexString[i] = std::toupper(hexString[i]);
+	}
 	// Adding the hex number to the message
-	magNum += str.str();
+	magNum += hexString;
 	std::string version = "Version: "; 					// Version number
 	version += std::to_string(myHeader->versionNumber);	// Adding version number to the message
 	std::string numRec = "NumRecords: ";
