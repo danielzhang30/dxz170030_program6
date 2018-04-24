@@ -23,6 +23,7 @@ clean:
 
 
 $(EXECFILE): $(OBJS)
+	git pull
 	$(CXX) -o $@ $(OBJS) $(LDFLAGS) $(LDLIBS)
 
 # Make backup
